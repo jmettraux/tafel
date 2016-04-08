@@ -26,5 +26,10 @@
 module Tafel
 
   VERSION = '0.1.0'
+
+  def self.turn(data)
+
+    data
+  end
 end
 
