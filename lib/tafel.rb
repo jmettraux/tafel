@@ -29,7 +29,32 @@ module Tafel
 
   def self.turn(data)
 
+    data = to_array(data)
+
+    if data.all? { |row| row.is_a?(Array) }
+      data
+    elsif data.all? { |row| row.is_a?(Hash) }
+      turn_array_of_hashes(data)
+    else
+      nil
+    end
+  end
+
+  protected
+
+  def self.to_array(data)
+
     data
+    #return data.values if data.is_a?(Hash)
+    #return Array[data]
+  end
+
+  def self.turn_array_of_hashes(data)
+
+    keys = data.inject([]) { |a, row| a.concat(row.keys) }.uniq
+
+    [ keys.collect(&:to_s) ] +
+    data.collect { |row| keys.collect { |k| row[k] } }
   end
 end
 

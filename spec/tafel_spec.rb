@@ -12,7 +12,7 @@ describe Tafel do
 
   context 'array of arrays' do
 
-    it 'leaves them untouched' do
+    it 'leaves it untouched' do
 
       expect(Tafel.turn(
         [
@@ -23,6 +23,27 @@ describe Tafel do
         [
           [ 'a', 'b' ],
           [ 1, 2 ]
+        ]
+      )
+    end
+  end
+
+  context 'array of objects' do
+
+    it 'turns it into an array of arrays' do
+
+      expect(Tafel.turn(
+        [
+          { a: 1, b: 2 },
+          { a: 3, b: 4, c: 5 },
+          { a: 6, c: 7 }
+        ]
+      )).to eq(
+        [
+          [ 'a', 'b', 'c' ],
+          [ 1, 2, nil ],
+          [ 3, 4, 5 ],
+          [ 6, nil, 7 ]
         ]
       )
     end
