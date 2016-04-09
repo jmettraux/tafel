@@ -10,63 +10,66 @@ require 'spec_helper'
 
 describe Tafel do
 
-  context 'array of arrays' do
+  describe '.turn' do
 
-    it 'leaves it untouched' do
+    context 'array of arrays' do
 
-      expect(Tafel.turn(
-        [
-          [ 'a', 'b' ],
-          [ 1, 2 ]
-        ]
-      )).to eq(
-        [
-          [ 'a', 'b' ],
-          [ 1, 2 ]
-        ]
-      )
+      it 'leaves it as is' do
+
+        expect(Tafel.turn(
+          [
+            [ 'a', 'b' ],
+            [ 1, 2 ]
+          ]
+        )).to eq(
+          [
+            [ 'a', 'b' ],
+            [ 1, 2 ]
+          ]
+        )
+      end
     end
-  end
 
-  context 'array of hashes' do
+    context 'array of hashes' do
 
-    it 'turns it into an array of arrays' do
+      it 'turns it into an array of arrays' do
 
-      expect(Tafel.turn(
-        [
-          { a: 1, b: 2 },
-          { a: 3, b: 4, c: 5 },
-          { a: 6, c: 7 }
-        ]
-      )).to eq(
-        [
-          [ :a, :b, :c ],
-          [ 1, 2, nil ],
-          [ 3, 4, 5 ],
-          [ 6, nil, 7 ]
-        ]
-      )
+        expect(Tafel.turn(
+          [
+            { a: 1, b: 2 },
+            { a: 3, b: 4, c: 5 },
+            { a: 6, c: 7 }
+          ]
+        )).to eq(
+          [
+            [ :a, :b, :c ],
+            [ 1, 2, nil ],
+            [ 3, 4, 5 ],
+            [ 6, nil, 7 ]
+          ]
+        )
+      end
     end
-  end
 
-  context 'hashes of hashes' do
+    context 'hashes of hashes' do
 
-    it 'turns it into an array of arrays' do
+      it 'turns it into an array of arrays' do
 
-      expect(Tafel.turn(
-        {
-          'USD' => { code: 'USD', change: 1.0, min: 500, status: 'active' },
-          'EUR' => { code: 'EUR', change: 1.07, status: 'active' },
-          'CHF' => { code: 'CHF', change: 1.08, min: 700 }
-        }
-      )).to eq(
-        [
-          [ :key, :code, :change, :min, :status ],
-          [ 'USD', 'USD', 1.0, 500, 'active' ],
-          [ 'EUR', 'EUR', 1.07, nil, 'active' ],
-          [ 'CHF', 'CHF', 1.08, 700, nil ]
-        ]
-      )
+        expect(Tafel.turn(
+          {
+            'USD' => { code: 'USD', change: 1.0, min: 500, status: 'active' },
+            'EUR' => { code: 'EUR', change: 1.07, status: 'active' },
+            'CHF' => { code: 'CHF', change: 1.08, min: 700 }
+          }
+        )).to eq(
+          [
+            [ :key, :code, :change, :min, :status ],
+            [ 'USD', 'USD', 1.0, 500, 'active' ],
+            [ 'EUR', 'EUR', 1.07, nil, 'active' ],
+            [ 'CHF', 'CHF', 1.08, 700, nil ]
+          ]
+        )
+      end
     end
   end
 end
