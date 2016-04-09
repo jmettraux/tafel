@@ -44,9 +44,14 @@ module Tafel
 
   def self.to_array(data)
 
-    data
-    #return data.values if data.is_a?(Hash)
-    #return Array[data]
+    if data.is_a?(Hash) && data.values.all? { |v| v.is_a?(Hash) }
+
+      data.collect { |k, v| { key: k }.update(v) }
+
+    else
+
+      data
+    end
   end
 
   def self.turn_array_of_hashes(data)

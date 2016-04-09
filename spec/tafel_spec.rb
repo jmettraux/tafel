@@ -28,7 +28,7 @@ describe Tafel do
     end
   end
 
-  context 'array of objects' do
+  context 'array of hashes' do
 
     it 'turns it into an array of arrays' do
 
@@ -44,6 +44,27 @@ describe Tafel do
           [ 1, 2, nil ],
           [ 3, 4, 5 ],
           [ 6, nil, 7 ]
+        ]
+      )
+    end
+  end
+
+  context 'hashes of hashes' do
+
+    it 'turns it into an array of arrays' do
+
+      expect(Tafel.turn(
+        {
+          'USD' => { code: 'USD', change: 1.0, min: 500, status: 'active' },
+          'EUR' => { code: 'EUR', change: 1.07, status: 'active' },
+          'CHF' => { code: 'CHF', change: 1.08, min: 700 }
+        }
+      )).to eq(
+        [
+          [ :key, :code, :change, :min, :status ],
+          [ 'USD', 'USD', 1.0, 500, 'active' ],
+          [ 'EUR', 'EUR', 1.07, nil, 'active' ],
+          [ 'CHF', 'CHF', 1.08, 700, nil ]
         ]
       )
     end
