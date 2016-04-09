@@ -40,7 +40,7 @@ describe Tafel do
         ]
       )).to eq(
         [
-          [ 'a', 'b', 'c' ],
+          [ :a, :b, :c ],
           [ 1, 2, nil ],
           [ 3, 4, 5 ],
           [ 6, nil, 7 ]

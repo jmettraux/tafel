@@ -53,8 +53,7 @@ module Tafel
 
     keys = data.inject([]) { |a, row| a.concat(row.keys) }.uniq
 
-    [ keys.collect(&:to_s) ] +
-    data.collect { |row| keys.collect { |k| row[k] } }
+    [ keys ] + data.collect { |row| keys.collect { |k| row[k] } }
   end
 end
 
