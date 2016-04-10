@@ -72,5 +72,21 @@ describe Tafel do
       end
     end
   end
+
+  describe '.indent' do
+
+    it 'adds nil columns to an array' do
+
+      expect(
+        Tafel.indent(2, [ [ 'a', 'b', ], [ 0, 1 ], [ 2, 3 ] ])
+      ).to eq(
+        [
+          [ nil, nil, 'a', 'b' ],
+          [ nil, nil, 0, 1 ],
+          [ nil, nil, 2, 3 ]
+        ]
+      )
+    end
+  end
 end
 
