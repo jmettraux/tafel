@@ -49,7 +49,11 @@ module Tafel
 
   def self.to_array(data)
 
-    if data.is_a?(Hash) && data.values.all? { |v| v.is_a?(Hash) }
+    if data.is_a?(Array)
+
+      data
+
+    elsif data.is_a?(Hash) && data.values.all? { |v| v.is_a?(Hash) }
 
       data.collect { |k, v| { key: k }.update(v) }
 
