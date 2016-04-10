@@ -27,7 +27,7 @@ module Tafel
 
   VERSION = '0.2.0'
 
-  def self.turn(data)
+  def self.turn(data, opts={})
 
     data = to_array(data)
 
@@ -50,7 +50,7 @@ module Tafel
 
     else
 
-      data
+      fail ArgumentError.new("cannot turn root input into an array")
     end
   end
 
