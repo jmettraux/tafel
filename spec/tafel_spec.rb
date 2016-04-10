@@ -72,49 +72,5 @@ describe Tafel do
       end
     end
   end
-
-#  describe '.grow' do
-#
-#    it 'turns an atom' do
-#
-#      expect(Tafel.grow(
-#        'a'
-#      )).to eq(
-#        [ [ 'a' ] ]
-#      )
-#    end
-#
-#    it 'turns a hash into an array of arrays' do
-#
-#      expect(Tafel.grow(
-#        {
-#          'name' => 'yellow ranger',
-#          'instances' => [ 1, 2, 3, 4, 5 ],
-#          'attributes' => { kind: false, evil: false, beard: '3 days' },
-#          'misc' => { size: 'XXL', eyes: 'blue', hair: 'none' }
-#        }
-#      )).to eq(
-#        [
-#          :x
-#        ]
-#      )
-#    end
-#  end
-
-  describe '.indent' do
-
-    it 'adds nil columns to an array' do
-
-      expect(
-        Tafel.indent(2, [ [ 'a', 'b', ], [ 0, 1 ], [ 2, 3 ] ])
-      ).to eq(
-        [
-          [ nil, nil, 'a', 'b' ],
-          [ nil, nil, 0, 1 ],
-          [ nil, nil, 2, 3 ]
-        ]
-      )
-    end
-  end
 end
 

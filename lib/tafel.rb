@@ -40,16 +40,6 @@ module Tafel
     end
   end
 
-#  def self.grow(data, parent=[])
-#
-#    parent << Array(data)
-#  end
-
-  def self.indent(n, array)
-
-    array.collect { |row| [ *([ nil ] * n), *row ] }
-  end
-
   protected
 
   def self.to_array(data)
