@@ -72,5 +72,35 @@ describe Tafel do
       end
     end
   end
+
+  describe '.flatten' do
+
+    it 'fails when the argument is not an array of arrays' do
+
+      expect {
+        Tafel.flatten(false)
+      }.to raise_error(ArgumentError, 'input is not a table')
+    end
+
+    it 'does not flatten when not necessary' do
+
+      expect(Tafel.flatten(
+        [ [ 0, 1 ], [ 2, 3 ] ]
+      )).to eq(
+        [ [ 0, 1 ], [ 2, 3 ] ]
+      )
+    end
+
+    it 'flattens' do
+      expect(Tafel.flatten(
+        [ [ 0, 1 ],
+          [ 2, [ [ 3, 4 ], [ 5, 6 ] ] ] ]
+      )).to eq(
+        [ [ 0, 1 ],
+          [ 2, 3, 4 ],
+          [ nil, 5, 6 ] ]
+      )
+    end
+  end
 end
 

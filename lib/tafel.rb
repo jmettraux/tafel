@@ -40,7 +40,95 @@ module Tafel
     end
   end
 
+  def self.table?(o)
+
+    o.is_a?(Array) && o.all? { |r| r.is_a?(Array) }
+  end
+
+  def self.size(o)
+
+#p [ o, '-->', table?(o) ? [ o.collect { |r| r.size }.max, o.size ] : 0 ]
+    table?(o) ? [ o.collect { |r| r.size }.max, o.size ] : [ 0, 0 ]
+  end
+
+  def self.flatten(table)
+
+    fail ArgumentError.new('not a table') unless table?(table)
+
+    flat = true
+
+    table =
+      table.collect { |r|
+        r.collect { |c| next c unless table?(c); flat = false; flatten(c) }
+      }
+
+    return table if flat
+
+    ss = table.collect { |r| r.collect { |c| size(c) } }
+
+    ws, hs = [ [], [] ]
+    iterate(ss) { |x, y, s| ws[x], hs[y] = s[0], s[1] }
+
+    w = ws.inject(0) { |i, w| i + (w > 0 ? w : 1) }
+    h = hs.inject(0) { |i, h| i + (h > 0 ? h : 1) }
+
+    a = Array.new(h) { Array.new(w) }
+
+    iterate(ss) do |x, y, s|
+p [ x, y, '->', table[y][x], '/', s, '/', ws[x], hs[y] ]
+      left = x > 0 ? ss[y][x - 1] : nil
+      above = y > 0 ? ss[y - 1][x] : nil
+p [ 'left', left, 'above', above ]
+      woff = left ? left[2] + [ 1, left[0] ].max : 0
+      hoff = above ? above[3] + [ 1, above[1] ].max : 0
+      s.push(woff, hoff)
+p [ '->', s ]
+      a
+    end
+
+    #w =
+    #  table.collect(&:size).max
+    #sizes =
+    #  table.collect { |r|
+    #    r.collect { |c| size(c) }.concat([ nil ] * (w - r.size))
+    #  }
+    #sizes =
+    #  sizes.collect { |r|
+    #    maxh = r.collect(&:last).max
+    #    r.collect { |w, h| [ w, maxh ] }
+    #  }
+    #(0..sizes.first.size - 1).each { |i|
+    #  maxw = (0..sizes.size - 1).collect { |j| sizes[j][i].first }.max
+    #  (0..sizes.size - 1).each { |j| sizes[j][i][0] = maxw }
+    #}
+      #
+    #iterate(table) do |x, y, v|
+    #  p [ x, y, '->', v, sizes[y][x] ]
+    #end
+
+    a
+
+    #w = table.collect(&:size).max
+    #table.each { |row| row.concat([ nil ] * (w - row.size)) }
+
+    #table.collect { |row|
+    #  h = row.collect { |cell| table?(cell) ? row.size : 1 }.max
+    #  row.collect { |cell|
+    #    table?(cell) ?
+    #  }
+    #}.flatten(1)
+  end
+
   protected
+
+  def self.iterate(table)
+
+    (0..table.first.size - 1).each do |x|
+      (0..table.size - 1).each do |y|
+        yield(x, y, table[y][x])
+      end
+    end
+  end
 
   def self.to_array(data)
 
