@@ -102,6 +102,21 @@ describe Tafel do
           [ nil, 5, 6 ] ]
       )
     end
+
+    it 'flattens' do
+
+      expect(Tafel.flatten(
+        [ [ 0, 1 ],
+          [ 2, [ [ 3, 4 ], [ 5, 6 ] ] ],
+          [ 7, [ [ 8, 9 ], [ 10 ] ] ] ]
+      )).to eq(
+        [ [ 0, 1, nil ],
+          [ 2, 3, 4 ],
+          [ nil, 5, 6 ],
+          [ 7, 8, 9 ],
+          [ nil, 10, nil ] ]
+      )
+    end
   end
 end
 

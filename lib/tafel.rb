@@ -65,11 +65,19 @@ module Tafel
 
     ss = table.collect { |r| r.collect { |c| size(c) } }
 
-    ws, hs = [ [], [] ]
-    iterate(ss) { |x, y, s| ws[x], hs[y] = s[0], s[1] }
+    ss.each do |row|
+      maxh = row.collect { |cell| cell[1] }.max
+      maxh = maxh < 1 ? 1 : maxh
+      row.each { |cell| cell[1] = maxh }
+    end
+    ss.collect { |row| row.size }.max.times do |x|
+      maxw = ss.collect { |row| cell = row[x]; cell ? cell[0] : 1 }.max
+      maxw = maxw < 1 ? 1 : maxw
+      ss.each { |row| cell = row[x]; cell[0] = maxw if cell }
+    end
 
-    w = ws.inject(0) { |i, w| i + (w > 0 ? w : 1) }
-    h = hs.inject(0) { |i, h| i + (h > 0 ? h : 1) }
+    w = ss.first.collect(&:first).reduce(&:+)
+    h = ss.collect { |row| row[0].last }.reduce(&:+)
 
     a = Array.new(h) { Array.new(w) }
 
@@ -78,8 +86,8 @@ module Tafel
       left = x > 0 ? ss[y][x - 1] : nil
       above = y > 0 ? ss[y - 1][x] : nil
 
-      woff = left ? left[2] + [ 1, left[0] ].max : 0
-      hoff = above ? above[3] + [ 1, above[1] ].max : 0
+      woff = left ? left[2] + left[0] : 0
+      hoff = above ? above[3] + above[1] : 0
 
       s.push(woff, hoff)
 
