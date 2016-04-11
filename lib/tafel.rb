@@ -110,8 +110,8 @@ module Tafel
 
   def self.iterate(table)
 
-    (0..table.first.size - 1).each do |x|
-      (0..table.size - 1).each do |y|
+    table.first.size.times do |x|
+      table.size.times do |y|
         yield(x, y, table[y][x])
       end
     end
