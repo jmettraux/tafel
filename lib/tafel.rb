@@ -27,7 +27,7 @@ module Tafel
 
   VERSION = '0.2.0'
 
-  def self.turn(data, opts={})
+  def self.turn(data)
 
     data = to_array(data)
 
