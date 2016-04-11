@@ -40,16 +40,6 @@ module Tafel
     end
   end
 
-  def self.table?(o)
-
-    o.is_a?(Array) && o.all? { |r| r.is_a?(Array) }
-  end
-
-  def self.size(o)
-
-    table?(o) ? [ o.collect { |r| r.size }.max, o.size ] : [ 0, 0 ]
-  end
-
   def self.flatten(table)
 
     fail ArgumentError.new('not a table') unless table?(table)
@@ -97,7 +87,17 @@ module Tafel
     a
   end
 
-  protected
+  protected # well...
+
+  def self.table?(o)
+
+    o.is_a?(Array) && o.all? { |r| r.is_a?(Array) }
+  end
+
+  def self.size(o)
+
+    table?(o) ? [ o.collect { |r| r.size }.max, o.size ] : [ 0, 0 ]
+  end
 
   def self.copy(target, woff, hoff, source)
 
