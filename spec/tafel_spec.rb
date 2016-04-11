@@ -79,7 +79,7 @@ describe Tafel do
 
       expect {
         Tafel.flatten(false)
-      }.to raise_error(ArgumentError, 'input is not a table')
+      }.to raise_error(ArgumentError, 'not a table')
     end
 
     it 'does not flatten when not necessary' do
@@ -92,11 +92,12 @@ describe Tafel do
     end
 
     it 'flattens' do
+
       expect(Tafel.flatten(
         [ [ 0, 1 ],
           [ 2, [ [ 3, 4 ], [ 5, 6 ] ] ] ]
       )).to eq(
-        [ [ 0, 1 ],
+        [ [ 0, 1, nil ],
           [ 2, 3, 4 ],
           [ nil, 5, 6 ] ]
       )
