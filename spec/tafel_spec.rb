@@ -73,6 +73,29 @@ describe Tafel do
     end
   end
 
+  describe '.grow' do
+
+    it 'turns a hash into a tree' do
+
+      expect(Tafel.grow(
+        { profile: { eyes: 'brown', hair: 'brown' },
+          numbers: [ 1, 2, 3, 5 ],
+          tools: {
+            pocket: [ 'swiss army knife', 'spyderco' ],
+            toolbox: [ { name: 'screwdriver', brand: 'makita' } ] } }
+      )).to eq(
+        [
+          [ :profile, [ [ :eyes, 'brown' ], [ :hair, 'brown' ] ] ],
+          [ :numbers, [ 1, 2, 3, 5 ] ],
+          [ :tools, [
+            [ :pocket, [ 'swiss army knife', 'spyderco' ] ],
+            [ :toolbox, [ [ [ :name, 'screwdriver' ], [ :brand, 'makita' ] ] ] ]
+          ] ]
+        ]
+      )
+    end
+  end
+
   describe '.flatten' do
 
     it 'fails when the argument is not an array of arrays' do
