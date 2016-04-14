@@ -140,6 +140,18 @@ describe Tafel do
           [ nil, 10, nil ] ]
       )
     end
+
+    it 'only flattens one level' do
+
+      expect(Tafel.flatten(
+        [ [ 0, 1 ],
+          [ 2, [ [ 3, 4 ], [ 5, [ 6, 7 ] ] ] ] ]
+      )).to eq(
+        [ [ 0, 1, nil ],
+          [ 2, 3, 4 ],
+          [ nil, 5, [ 6, 7 ] ] ]
+      )
+    end
   end
 end
 
