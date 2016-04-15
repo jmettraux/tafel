@@ -40,6 +40,15 @@ module Tafel
     end
   end
 
+  def self.grow(data)
+
+    case data
+      when Hash then data.collect { |k, v| [ grow(k), grow(v) ] }
+      when Array then data.collect { |e| grow(e) }
+      else data
+    end
+  end
+
   def self.flatten(table)
 
     fail ArgumentError.new('not a table') unless table?(table)

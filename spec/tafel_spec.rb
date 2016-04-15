@@ -75,6 +75,21 @@ describe Tafel do
 
   describe '.grow' do
 
+    it 'grows a hash into a tree' do
+
+        expect(Tafel.grow(
+          {
+            'USD' => { 'code' => 'USD', 'change' => 1.01 },
+            'CHF' => { 'code' => 'CHF', 'change' => 1.08 }
+          }
+        )).to eq(
+          [
+            [ 'USD', [ [ 'code', 'USD' ], [ 'change', 1.01 ] ] ],
+            [ 'CHF', [ [ 'code', 'CHF' ], [ 'change', 1.08 ] ] ],
+          ]
+        )
+    end
+
     it 'turns a hash into a tree' do
 
       expect(Tafel.grow(
