@@ -10,9 +10,13 @@ A Ruby library to turn pieces of data into arrays of arrays (tables).
 
 ### Tafel.turn
 
+Turns an array of hashes into an array of arrays.
+
 TODO
 
 ### Tafel.grow
+
+Turns a hash into an array of arrays.
 
 TODO
 
