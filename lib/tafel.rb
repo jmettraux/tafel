@@ -40,11 +40,11 @@ module Tafel
     end
   end
 
-  def self.grow(data)
+  def self.array(data)
 
     case data
-      when Hash then data.collect { |k, v| [ grow(k), grow(v) ] }
-      when Array then data.collect { |e| grow(e) }
+      when Hash then data.collect { |k, v| [ array(k), array(v) ] }
+      when Array then data.collect { |e| array(e) }
       else data
     end
   end

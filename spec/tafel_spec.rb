@@ -73,11 +73,11 @@ describe Tafel do
     end
   end
 
-  describe '.grow' do
+  describe '.array' do
 
-    it 'grows a hash into a tree' do
+    it 'arrays a hash into a tree' do
 
-        expect(Tafel.grow(
+        expect(Tafel.array(
           {
             'USD' => { 'code' => 'USD', 'change' => 1.01 },
             'CHF' => { 'code' => 'CHF', 'change' => 1.08 }
@@ -92,7 +92,7 @@ describe Tafel do
 
     it 'turns a hash into a tree' do
 
-      expect(Tafel.grow(
+      expect(Tafel.array(
         { profile: { eyes: 'brown', hair: 'brown' },
           numbers: [ 1, 2, 3, 5 ],
           tools: {

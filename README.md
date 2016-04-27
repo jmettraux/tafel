@@ -15,7 +15,7 @@ Output: array of arrays (table)
 
 TODO
 
-### Tafel.grow
+### Tafel.array
 
 Input: hash
 Output: array of arrays (table)
