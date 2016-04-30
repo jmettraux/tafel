@@ -72,20 +72,6 @@ describe Tafel do
 #
 #      it 'turns it into an array of arrays' do
 #
-#        expect(Tafel.turn(
-#          {
-#            'USD' => { code: 'USD', change: 1.0, min: 500, status: 'active' },
-#            'EUR' => { code: 'EUR', change: 1.07, status: 'active' },
-#            'CHF' => { code: 'CHF', change: 1.08, min: 700 }
-#          }
-#        )).to eq(
-#          [
-#            [ :key, :code, :change, :min, :status ],
-#            [ 'USD', 'USD', 1.0, 500, 'active' ],
-#            [ 'EUR', 'EUR', 1.07, nil, 'active' ],
-#            [ 'CHF', 'CHF', 1.08, 700, nil ]
-#          ]
-#        )
 #      end
 #    end
 #  end
@@ -138,7 +124,24 @@ describe Tafel do
       expect(Tafel.to_htable('oompf')).to eq('oompf')
     end
 
-    it 'turns hashes of hashes to tables'
+    it 'turns hashes of hashes to tables' do
+
+      expect(Tafel.to_h(
+        {
+          'USD' => { code: 'USD', change: 1.0, min: 500, status: 'active' },
+          'EUR' => { code: 'EUR', change: 1.07, status: 'active' },
+          'CHF' => { code: 'CHF', change: 1.08, min: 700 }
+        }
+      )).to eq(
+        [
+          [ :key, :code, :change, :min, :status ],
+          [ 'USD', 'USD', 1.0, 500, 'active' ],
+          [ 'EUR', 'EUR', 1.07, nil, 'active' ],
+          [ 'CHF', 'CHF', 1.08, 700, nil ]
+        ]
+      )
+    end
+
     it 'turns arrays of hashes to tables'
     it 'turns hashes to tables'
   end

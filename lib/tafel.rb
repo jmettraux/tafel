@@ -32,6 +32,9 @@ module Tafel
     o.is_a?(Array) && o.all? { |r| r.is_a?(Array) }
   end
 
+  # .to_vtable: keys are arrayed vertically (y explosion)
+  # .to_htable: keys are arrayed horizontally (x explosion)
+
   def self.to_vtable(x, limit=-1)
 
     return x if limit == 0
@@ -45,9 +48,18 @@ module Tafel
 
   def self.to_htable(x)
 
-    case x
-      when Hash then x
-      when Array then x
+    kla0 = narrow_class(x)
+
+    kla1 = nil
+    if kla0
+      vs = x.respond_to?(:values) ? x.values : x
+      kla = narrow_class(vs.first)
+      kla1 = vs.all? { |v| v.is_a?(kla) } ? kla : nil
+    end
+
+#p [ kla0, kla1 ]
+    case [ kla0, kla1 ]
+      when [ Hash, Hash ] then to_h_hash_hash(x)
       else x
     end
   end
@@ -127,6 +139,25 @@ module Tafel
         yield(x, y, table[y][x])
       end
     end
+  end
+
+  def self.narrow_class(x)
+
+    return Array if x.is_a?(Array)
+    return Hash if x.is_a?(Hash)
+    nil
+  end
+
+  def self.to_h_hash_hash(h)
+
+    keys = h.values.inject([ :key ]) { |ks, v| ks.concat(v.keys) }.uniq
+    table = [ keys ]
+
+    h.each do |k, v|
+      table << keys[1..-1].inject([ k ]) { |row, key| row << v[key]; row }
+    end
+
+    table
   end
 end
 
