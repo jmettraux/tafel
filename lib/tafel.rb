@@ -38,6 +38,7 @@ module Tafel
 
     case x
       when Hash then x.to_a.collect { |k, v| [ k, to_vtable(v, limit - 1) ] }
+      when Array then x.collect { |e| [ to_vtable(e) ] }
       else x
     end
   end

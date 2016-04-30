@@ -167,6 +167,17 @@ describe Tafel do
         ]
       )
     end
+
+    it 'turns an array into a table' do
+
+      expect(Tafel.to_v(
+        [ 1, 2, 3 ]
+      )).to eq(
+        [
+          [ 1 ], [ 2 ], [ 3 ]
+        ]
+      )
+    end
   end
 
   describe '.flatten' do
