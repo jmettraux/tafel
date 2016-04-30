@@ -27,27 +27,19 @@ module Tafel
 
   VERSION = '0.3.0'
 
-#  def self.turn(data)
-#
-#    data = to_array(data)
-#
-#    if data.all? { |row| row.is_a?(Array) }
-#      data
-#    elsif data.all? { |row| row.is_a?(Hash) }
-#      turn_array_of_hashes(data)
-#    else
-#      nil
-#    end
-#  end
-#
-#  def self.array(data)
-#
-#    case data
-#      when Hash then data.collect { |k, v| [ array(k), array(v) ] }
-#      when Array then data.collect { |e| array(e) }
-#      else data
-#    end
-#  end
+  def self.to_vtable(x, limit=-1)
+
+    return x if limit == 0
+
+    case x
+      when Hash then x.to_a.collect { |k, v| [ k, to_vtable(v, limit - 1) ] }
+      else x
+    end
+  end
+
+  class << self
+    alias to_v to_vtable
+  end
 
   def self.flatten(table)
 
@@ -125,28 +117,5 @@ module Tafel
       end
     end
   end
-
-#  def self.to_array(data)
-#
-#    if data.is_a?(Array)
-#
-#      data
-#
-#    elsif data.is_a?(Hash) && data.values.all? { |v| v.is_a?(Hash) }
-#
-#      data.collect { |k, v| { key: k }.update(v) }
-#
-#    else
-#
-#      fail ArgumentError.new("cannot turn root input into an array")
-#    end
-#  end
-
-#  def self.turn_array_of_hashes(data)
-#
-#    keys = data.inject([]) { |a, row| a.concat(row.keys) }.uniq
-#
-#    [ keys ] + data.collect { |row| keys.collect { |k| row[k] } }
-#  end
 end
 

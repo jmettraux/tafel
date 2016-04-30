@@ -111,6 +111,47 @@ describe Tafel do
 #    end
 #  end
 
+  describe '.to_vtable' do
+
+    it 'turns a hash into a table' do
+
+      expect(Tafel.to_v(
+        { name: 'Leo Ferre', title: 'Mr', age: -1 }
+      )).to eq(
+        [
+          [ :name, 'Leo Ferre' ],
+          [ :title, 'Mr' ],
+          [ :age, -1 ]
+        ]
+      )
+    end
+
+    it 'runs recursively' do
+
+      expect(Tafel.to_v(
+        { interpret: 'Leo Ferre', song: { name: "C'est extra", year: 1969 } },
+      )).to eq(
+        [
+          [ :interpret, 'Leo Ferre' ],
+          [ :song, [ [ :name, "C'est extra" ], [ :year, 1969 ] ] ]
+        ]
+      )
+    end
+
+    it 'accepts a "limit" int argument to control recursion' do
+
+      expect(Tafel.to_v(
+        { interpret: 'Leo Ferre', song: { name: "C'est extra", year: 1969 } },
+        1
+      )).to eq(
+        [
+          [ :interpret, 'Leo Ferre' ],
+          [ :song, { name: "C'est extra", year: 1969 } ]
+        ]
+      )
+    end
+  end
+
   describe '.flatten' do
 
     it 'fails when the argument is not an array of arrays' do
