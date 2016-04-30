@@ -27,6 +27,11 @@ module Tafel
 
   VERSION = '0.3.0'
 
+  def self.table?(o)
+
+    o.is_a?(Array) && o.all? { |r| r.is_a?(Array) }
+  end
+
   def self.to_vtable(x, limit=-1)
 
     return x if limit == 0
@@ -89,11 +94,6 @@ module Tafel
   end
 
   protected # well...
-
-  def self.table?(o)
-
-    o.is_a?(Array) && o.all? { |r| r.is_a?(Array) }
-  end
 
   def self.size(o)
 

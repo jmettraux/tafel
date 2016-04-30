@@ -10,6 +10,23 @@ require 'spec_helper'
 
 describe Tafel do
 
+  describe '.table?' do
+
+    it 'returns true if the argument is a table' do
+
+      expect(Tafel.table?([])).to eq(true)
+      expect(Tafel.table?([ [], [], [] ])).to eq(true)
+    end
+
+    it 'returns false if the argument is not a table' do
+
+      expect(Tafel.table?(:x)).to eq(false)
+      expect(Tafel.table?(1)).to eq(false)
+      expect(Tafel.table?({})).to eq(false)
+      expect(Tafel.table?([ 1, 2, 3 ])).to eq(false)
+    end
+  end
+
 #  describe '.turn' do
 #
 #    context 'array of arrays' do
