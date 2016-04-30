@@ -8,20 +8,6 @@ A Ruby library to turn pieces of data into arrays of arrays (tables).
 
 ## interface
 
-### Tafel.turn
-
-Input: array of hashes or hashes of hashes
-Output: array of arrays (table)
-
-TODO
-
-### Tafel.array
-
-Input: hash
-Output: array of arrays (table)
-
-TODO
-
 ### Tafel.flatten
 
 Turns nested tables into a single table.
