@@ -225,6 +225,20 @@ describe Tafel do
       )
     end
 
+    it 'flattens (2)' do
+
+      t = Tafel.to_v(
+        { interpret: 'Leo Ferre', song: { name: "C'est extra", year: 1969 } })
+
+      expect(Tafel.flatten(t)).to eq(
+        [
+          [ :interpret, 'Leo Ferre', nil ],
+          [ :song, :name, "C'est extra" ],
+          [ nil, :year, 1969 ]
+        ]
+      )
+    end
+
     it 'only flattens one level' do
 
       expect(Tafel.flatten(
