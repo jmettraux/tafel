@@ -128,6 +128,21 @@ describe Tafel do
 #    end
 #  end
 
+  describe '.to_htable' do
+
+    it 'leaves non-array and non-hash as is' do
+
+      expect(Tafel.to_htable(1)).to eq(1)
+      expect(Tafel.to_htable(:x)).to eq(:x)
+      expect(Tafel.to_htable(true)).to eq(true)
+      expect(Tafel.to_htable('oompf')).to eq('oompf')
+    end
+
+    it 'turns hashes of hashes to tables'
+    it 'turns arrays of hashes to tables'
+    it 'turns hashes to tables'
+  end
+
   describe '.to_vtable' do
 
     it 'turns a hash into a table' do

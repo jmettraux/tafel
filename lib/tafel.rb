@@ -43,8 +43,18 @@ module Tafel
     end
   end
 
+  def self.to_htable(x)
+
+    case x
+      when Hash then x
+      when Array then x
+      else x
+    end
+  end
+
   class << self
     alias to_v to_vtable
+    alias to_h to_htable
   end
 
   def self.flatten(table)
