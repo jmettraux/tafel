@@ -54,13 +54,14 @@ module Tafel
     if kla0
       vs = x.respond_to?(:values) ? x.values : x
       kla = narrow_class(vs.first)
-      kla1 = vs.all? { |v| v.is_a?(kla) } ? kla : nil
+      kla1 = vs.all? { |v| kla ? v.is_a?(kla) : false } ? kla : nil
     end
 
 #p [ kla0, kla1 ]
     case [ kla0, kla1 ]
       when [ Hash, Hash ] then to_h_hash_hash(x)
       when [ Array, Hash ] then to_h_array_hash(x)
+      when [ Hash, nil ] then to_h_hash(x)
       else x
     end
   end
@@ -159,6 +160,11 @@ module Tafel
     end
 
     table
+  end
+
+  def self.to_h_hash(h)
+
+    [ h.keys, h.inject([]) { |a, (k, v)| a << v; a } ]
   end
 
   def self.to_h_array_hash(a)

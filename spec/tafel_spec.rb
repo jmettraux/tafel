@@ -145,7 +145,17 @@ describe Tafel do
       )
     end
 
-    it 'turns hashes to tables'
+    it 'turns hashes to tables' do
+
+      expect(Tafel.to_htable(
+        { a: 3, b: 4, c: 5 }
+      )).to eq(
+        [
+          [ :a, :b, :c ],
+          [ 3, 4, 5 ]
+        ]
+      )
+    end
   end
 
   describe '.to_vtable' do
