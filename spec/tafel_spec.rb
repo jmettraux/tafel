@@ -50,21 +50,6 @@ describe Tafel do
 #    context 'array of hashes' do
 #
 #      it 'turns it into an array of arrays' do
-#
-#        expect(Tafel.turn(
-#          [
-#            { a: 1, b: 2 },
-#            { a: 3, b: 4, c: 5 },
-#            { a: 6, c: 7 }
-#          ]
-#        )).to eq(
-#          [
-#            [ :a, :b, :c ],
-#            [ 1, 2, nil ],
-#            [ 3, 4, 5 ],
-#            [ 6, nil, 7 ]
-#          ]
-#        )
 #      end
 #    end
 #
@@ -142,7 +127,24 @@ describe Tafel do
       )
     end
 
-    it 'turns arrays of hashes to tables'
+    it 'turns arrays of hashes to tables' do
+
+      expect(Tafel.to_htable(
+        [
+          { a: 1, b: 2 },
+          { a: 3, b: 4, c: 5 },
+          { a: 6, c: 7 }
+        ]
+      )).to eq(
+        [
+          [ :a, :b, :c ],
+          [ 1, 2, nil ],
+          [ 3, 4, 5 ],
+          [ 6, nil, 7 ]
+        ]
+      )
+    end
+
     it 'turns hashes to tables'
   end
 

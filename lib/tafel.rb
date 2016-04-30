@@ -60,6 +60,7 @@ module Tafel
 #p [ kla0, kla1 ]
     case [ kla0, kla1 ]
       when [ Hash, Hash ] then to_h_hash_hash(x)
+      when [ Array, Hash ] then to_h_array_hash(x)
       else x
     end
   end
@@ -155,6 +156,18 @@ module Tafel
 
     h.each do |k, v|
       table << keys[1..-1].inject([ k ]) { |row, key| row << v[key]; row }
+    end
+
+    table
+  end
+
+  def self.to_h_array_hash(a)
+
+    keys = a.inject([]) { |ks, h| ks.concat(h.keys) }.uniq
+    table = [ keys ]
+
+    a.each do |h|
+      table << keys.inject([]) { |row, key| row << h[key]; row }
     end
 
     table
