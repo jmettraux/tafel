@@ -27,40 +27,6 @@ describe Tafel do
     end
   end
 
-#  describe '.turn' do
-#
-#    context 'array of arrays' do
-#
-#      it 'leaves it as is' do
-#
-#        expect(Tafel.turn(
-#          [
-#            [ 'a', 'b' ],
-#            [ 1, 2 ]
-#          ]
-#        )).to eq(
-#          [
-#            [ 'a', 'b' ],
-#            [ 1, 2 ]
-#          ]
-#        )
-#      end
-#    end
-#
-#    context 'array of hashes' do
-#
-#      it 'turns it into an array of arrays' do
-#      end
-#    end
-#
-#    context 'hashes of hashes' do
-#
-#      it 'turns it into an array of arrays' do
-#
-#      end
-#    end
-#  end
-#
 #  describe '.array' do
 #
 #    it 'arrays a hash into a tree' do
@@ -176,10 +142,10 @@ describe Tafel do
     it 'runs recursively' do
 
       expect(Tafel.to_v(
-        { interpret: 'Leo Ferre', song: { name: "C'est extra", year: 1969 } },
+        { interpreter: 'Leo Ferre', song: { name: "C'est extra", year: 1969 } }
       )).to eq(
         [
-          [ :interpret, 'Leo Ferre' ],
+          [ :interpreter, 'Leo Ferre' ],
           [ :song, [ [ :name, "C'est extra" ], [ :year, 1969 ] ] ]
         ]
       )
