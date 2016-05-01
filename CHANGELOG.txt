@@ -2,9 +2,9 @@
 = tafel CHANGELOG.txt
 
 
-== tafel 0.2.0  not yet released
+== tafel 0.3.0  released 2016-05-02
 
-- deal with hashes of hashes
+- settle on .flatten, .to_vtable and to_htable
 
 
 == tafel 0.1.0  released 2016-04-10

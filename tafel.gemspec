@@ -10,13 +10,13 @@ Gem::Specification.new do |s|
   s.platform = Gem::Platform::RUBY
   s.authors = [ 'John Mettraux' ]
   s.email = [ 'jmettraux@gmail.com' ]
-  s.homepage = 'http://github.com/jmettraux/raabro'
+  s.homepage = 'http://github.com/jmettraux/tafel'
   s.rubyforge_project = 'rufus'
   s.license = 'MIT'
-  s.summary = 'something to turn data into an array of arrays'
+  s.summary = 'something to turn data into arrays of arrays'
 
   s.description = %{
-Something to turn data (JSON) into an array of arrays (CSV)
+Something to turn data into arrays of arrays (suitable for CSV).
   }.strip
 
   #s.files = `git ls-files`.split("\n")
