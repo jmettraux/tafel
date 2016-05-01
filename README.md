@@ -8,6 +8,8 @@ A Ruby library to turn pieces of data into arrays of arrays (tables).
 
 ## interface
 
+Tafel provides 3 main methods.
+
 ### Tafel .to_htable .to_h
 
 Turns the argument into a table where keys are arrayed horizontally.
