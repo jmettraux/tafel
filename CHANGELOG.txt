@@ -2,6 +2,9 @@
 = tafel CHANGELOG.txt
 
 
+== tafel 1.0.0  not yet released
+
+
 == tafel 0.3.0  released 2016-05-02
 
 - settle on .flatten, .to_vtable and to_htable
