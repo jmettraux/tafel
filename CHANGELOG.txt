@@ -4,6 +4,8 @@
 
 == tafel 1.0.0  not yet released
 
+- index tables out of .to_vtable
+
 
 == tafel 0.3.0  released 2016-05-02
 

@@ -41,7 +41,7 @@ module Tafel
 
     case x
       when Hash then x.to_a.collect { |k, v| [ k, to_vtable(v, limit - 1) ] }
-      when Array then x.collect { |e| [ to_vtable(e) ] }
+      when Array then x.inject([]) { |a, e| a << [ a.size, to_vtable(e) ]; a }
       else x
     end
   end

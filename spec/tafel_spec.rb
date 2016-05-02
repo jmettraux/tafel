@@ -167,10 +167,22 @@ describe Tafel do
     it 'turns an array into a table' do
 
       expect(Tafel.to_v(
-        [ 1, 2, 3 ]
+        [ 'aa', 'bb', 'cc' ]
       )).to eq(
         [
-          [ 1 ], [ 2 ], [ 3 ]
+          [ 0, 'aa' ], [ 1, 'bb' ], [ 2, 'cc' ]
+        ]
+      )
+    end
+
+    it 'turns an hash of arrays into a table' do
+
+      expect(Tafel.to_v(
+        { 'a' => [ 'a', 'A' ], 'b' => [ 'b', 'B' ] }
+      )).to eq(
+        [
+          [ 'a', [ [ 0, 'a' ], [ 1, 'A' ] ] ],
+          [ 'b', [ [ 0, 'b' ], [ 1, 'B' ] ] ]
         ]
       )
     end
