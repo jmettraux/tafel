@@ -197,6 +197,15 @@ describe Tafel do
       }.to raise_error(ArgumentError, 'not a table')
     end
 
+    it 'does not flatten when not necessary (misc cases)' do
+
+      expect(Tafel.flatten([])).to eq([])
+      expect(Tafel.flatten([ [] ])).to eq([ [] ])
+      expect(Tafel.flatten([ [ nil ] ])).to eq([ [ nil ] ])
+      expect(Tafel.flatten([ [ nil ], [] ])).to eq([ [ nil ], [] ])
+      expect(Tafel.flatten([ [ 1 ], [ 2 ] ])).to eq([ [ 1 ], [ 2 ] ])
+    end
+
     it 'does not flatten when not necessary' do
 
       expect(Tafel.flatten(

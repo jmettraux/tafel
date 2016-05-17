@@ -85,6 +85,7 @@ module Tafel
     return table if flat
 
     ss = table.collect { |r| r.collect { |c| size(c) } }
+ss.each { |s| p s }
 
     ss.each do |row|
       maxh = row.collect { |cell| cell[1] }.max
@@ -92,7 +93,7 @@ module Tafel
       row.each { |cell| cell[1] = maxh }
     end
     ss.collect { |row| row.size }.max.times do |x|
-      maxw = ss.collect { |row| cell = row[x]; cell ? cell[0] : 1 }.max
+      maxw = ss.collect { |row| cell = row[x]; p cell; cell ? cell[0] : 1 }.max
       maxw = maxw < 1 ? 1 : maxw
       ss.each { |row| cell = row[x]; cell[0] = maxw if cell }
     end
