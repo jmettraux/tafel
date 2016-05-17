@@ -4,6 +4,8 @@
 
 == tafel 1.0.1  not yet released
 
+- let Tafel.flatten survive empty arrays
+
 
 == tafel 1.0.0  released 2016-05-03
 

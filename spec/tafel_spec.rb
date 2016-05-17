@@ -215,7 +215,36 @@ describe Tafel do
       )
     end
 
-    it 'flattens' do
+    it 'flattens xxx' do
+
+      expect(Tafel.flatten(
+        [ [ 0, 1 ],
+          [ 2 ] ]
+      )).to eq(
+        [ [ 0, 1 ],
+          [ 2 ] ]
+      )
+    end
+
+    it 'flattens a non-balanced array' do
+
+      expect(Tafel.flatten(
+        [ [ 0, 1 ], [ 2 ] ]
+      )).to eq(
+        [ [ 0, 1 ], [ 2 ] ]
+      )
+    end
+
+    it 'flattens an empty array element' do
+
+      expect(Tafel.flatten(
+        [ [ 0, 1 ], [ [] ] ]
+      )).to eq(
+        [ [ 0, 1 ], [ nil, nil ] ]
+      )
+    end
+
+    it 'flattens (0)' do
 
       expect(Tafel.flatten(
         [ [ 0, 1 ],
@@ -227,7 +256,7 @@ describe Tafel do
       )
     end
 
-    it 'flattens' do
+    it 'flattens (1)' do
 
       expect(Tafel.flatten(
         [ [ 0, 1 ],

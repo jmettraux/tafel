@@ -85,7 +85,6 @@ module Tafel
     return table if flat
 
     ss = table.collect { |r| r.collect { |c| size(c) } }
-ss.each { |s| p s }
 
     ss.each do |row|
       maxh = row.collect { |cell| cell[1] }.max
@@ -93,7 +92,7 @@ ss.each { |s| p s }
       row.each { |cell| cell[1] = maxh }
     end
     ss.collect { |row| row.size }.max.times do |x|
-      maxw = ss.collect { |row| cell = row[x]; p cell; cell ? cell[0] : 1 }.max
+      maxw = ss.collect { |row| cell = row[x]; cell ? cell[0] : 1 }.max
       maxw = maxw < 1 ? 1 : maxw
       ss.each { |row| cell = row[x]; cell[0] = maxw if cell }
     end
@@ -104,6 +103,8 @@ ss.each { |s| p s }
     a = Array.new(h) { Array.new(w) }
 
     iterate(ss) do |x, y, s|
+
+      next unless s
 
       left = x > 0 ? ss[y][x - 1] : nil
       above = y > 0 ? ss[y - 1][x] : nil
@@ -123,7 +124,11 @@ ss.each { |s| p s }
 
   def self.size(o)
 
-    table?(o) ? [ o.collect { |r| r.size }.max, o.size ] : [ 0, 0 ]
+    if table?(o) && o.any?
+      [ o.collect { |r| r.size }.max, o.size ]
+    else
+      [ 0, 0 ]
+    end
   end
 
   def self.copy(target, woff, hoff, source)
@@ -141,7 +146,7 @@ ss.each { |s| p s }
       table.size.times do |y|
         yield(x, y, table[y][x])
       end
-    end
+    end if table.any?
   end
 
   def self.narrow_class(x)
