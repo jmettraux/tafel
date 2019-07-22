@@ -152,13 +152,9 @@ module Tafel
   def self.to_h_array_hash(a)
 
     keys = a.inject([]) { |ks, h| ks.concat(h.keys) }.uniq
-    table = [ keys ]
 
-    a.each do |h|
-      table << keys.inject([]) { |row, key| row << h[key]; row }
-    end
-
-    table
+    [ keys ] +
+    a.collect { |h| keys.inject([]) { |row, key| row << h[key]; row } }
   end
 end
 
