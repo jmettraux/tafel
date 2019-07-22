@@ -11,7 +11,6 @@ Gem::Specification.new do |s|
   s.authors = [ 'John Mettraux' ]
   s.email = [ 'jmettraux@gmail.com' ]
   s.homepage = 'http://github.com/jmettraux/tafel'
-  s.rubyforge_project = 'rufus'
   s.license = 'MIT'
   s.summary = 'something to turn data into arrays of arrays'
 
