@@ -16,9 +16,9 @@ module Tafel
     return x if limit == 0
 
     case x
-      when Hash then x.to_a.collect { |k, v| [ k, to_vtable(v, limit - 1) ] }
-      when Array then x.inject([]) { |a, e| a << [ a.size, to_vtable(e) ]; a }
-      else x
+    when Hash then x.to_a.collect { |k, v| [ k, to_vtable(v, limit - 1) ] }
+    when Array then x.inject([]) { |a, e| a << [ a.size, to_vtable(e) ]; a }
+    else x
     end
   end
 
@@ -35,10 +35,10 @@ module Tafel
 
 #p [ kla0, kla1 ]
     case [ kla0, kla1 ]
-      when [ Hash, Hash ] then to_h_hash_hash(x)
-      when [ Array, Hash ] then to_h_array_hash(x)
-      when [ Hash, nil ] then to_h_hash(x)
-      else x
+    when [ Hash, Hash ] then to_h_hash_hash(x)
+    when [ Array, Hash ] then to_h_array_hash(x)
+    when [ Hash, nil ] then to_h_hash(x)
+    else x
     end
   end
 
